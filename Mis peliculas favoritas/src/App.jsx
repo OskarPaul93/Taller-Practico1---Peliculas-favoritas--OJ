@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import './App.css'
 
-function Pelicula({titulo}) {
+function Pelicula({titulo, director}) {
   const [favorita, setFavorita] = useState(false);
+  const [fueVista, setFueVista] = useState(false);
 
   return (
     <div style={{
@@ -14,9 +15,21 @@ function Pelicula({titulo}) {
         fontSize: "20px",
       }}
 
+      style={{
+        backgroundColor: fueVista ? "#341d78" : "#f4f4f4",
+        padding: "15px",
+        margin: "10px 0",
+        borderRadius: "8px",
+        cursor: "pointer",
+        fontSize: "20px",
+      }}
+
       onClick={() => setFavorita(!favorita)}
     >
-      {titulo} {favorita ? "⭐" : ""}
+      {titulo + " " + director} {favorita ? "⭐" : ""}
+
+      <button onClick={()=>setFueVista(!fueVista)}> Marcar como vista</button>
+
     </div>
   );
 }
@@ -27,7 +40,10 @@ function App() {
     "La teoria del todo",
     "Avengers: Endgame",
     "Juego de honor",
+    
   ]);
+
+  const director= "Oscar"
 
   const [nuevaPelicula, setNuevaPelicula] = useState("");
 
@@ -69,7 +85,7 @@ function App() {
 
       <div style={{ marginTop: "20px" }}>
         {peliculas.map((pelicula, indice) => (
-          <Pelicula key={indice} titulo={pelicula} />
+          <Pelicula key={indice} titulo={pelicula} director= {director}/>
         ))}
       </div>
     </div>
